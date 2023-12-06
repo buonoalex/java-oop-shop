@@ -1,20 +1,18 @@
 package org.lessons.java.shop;
 
+import java.util.Random;
+
 public class Prodotto {
     private int codeProduct;
     private String nameProduct;
     private String descriptionProduct;
-    private int prizeProduct;
+    private double prizeProduct;
     private int iva;
 
     //Getter and Setter
 
     public int getCodeProduct() {
         return codeProduct;
-    }
-
-    public void setCodeProduct(int codeProduct) {
-        this.codeProduct = codeProduct;
     }
 
     public String getNameProduct() {
@@ -33,7 +31,7 @@ public class Prodotto {
         this.descriptionProduct = descriptionProduct;
     }
 
-    public int getPrizeProduct() {
+    public double getPrizeProduct() {
         return prizeProduct;
     }
 
@@ -51,8 +49,9 @@ public class Prodotto {
 
     //Costruttori
 
-    public Prodotto(int codeProduct, String nameProduct, String descriptionProduct, int prizeProduct, int iva) {
-        this.codeProduct = codeProduct;
+    public Prodotto(String nameProduct, String descriptionProduct, double prizeProduct, int iva) {
+        Random codiceSegretoRandom = new Random();
+        this.codeProduct = codiceSegretoRandom.nextInt(1,1000);
         this.nameProduct = nameProduct;
         this.descriptionProduct = descriptionProduct;
         this.prizeProduct = prizeProduct;
@@ -64,4 +63,15 @@ public class Prodotto {
     }
 
     //Metodi
+    @Override
+    public String toString() {
+        return "Prodotto\n"
+                +"----------\n"+
+                "codeProduct = " + codeProduct +"\n"+
+                "nameProduct = " + nameProduct +"\n"+
+                "descriptionProduct = " + descriptionProduct +"\n"+
+                "prizeProduct = " + prizeProduct + "€"+"\n"+
+                "iva = " + iva + "%\n"+
+                "----------";
+    }
 }
