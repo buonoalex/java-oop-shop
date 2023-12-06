@@ -72,6 +72,19 @@ public class Prodotto {
                 "descriptionProduct = " + descriptionProduct +"\n"+
                 "prizeProduct = " + prizeProduct + "€"+"\n"+
                 "iva = " + iva + "%\n"+
+                "sumWithIva = " +SumPriceWthIva()+"€"+"\n"+
+                "completeProductWithCode = "+UnionCodePlusNameProduct()+"\n"+
                 "----------";
     }
+
+    //Metodo somma prodotto più iva
+    public int SumPriceWthIva(){
+        return (int) (prizeProduct + ((prizeProduct * iva)/100));
+    }
+
+    //Metodo nome esteso con code
+    public String UnionCodePlusNameProduct(){
+        return codeProduct +"-"+ nameProduct;
+    }
+
 }
