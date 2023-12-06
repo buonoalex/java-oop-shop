@@ -8,6 +8,7 @@ public class Prodotto {
     private String descriptionProduct;
     private double prizeProduct;
     private int iva;
+    private Categoria categoryProduct = new Categoria();
 
     //Getter and Setter
 
@@ -47,15 +48,25 @@ public class Prodotto {
         this.iva = iva;
     }
 
+    public Categoria getCategoryProduct() {
+        return categoryProduct;
+    }
+
+    public void setCategoryProduct(Categoria categoryProduct) {
+        this.categoryProduct = categoryProduct;
+    }
+
     //Costruttori
 
-    public Prodotto(String nameProduct, String descriptionProduct, double prizeProduct, int iva) {
+    public Prodotto(String nameProduct, String descriptionProduct, double prizeProduct, int iva , String nameCategory , String descriptionCategory) {
         Random codiceSegretoRandom = new Random();
         this.codeProduct = codiceSegretoRandom.nextInt(1,1000);
         this.nameProduct = nameProduct;
         this.descriptionProduct = descriptionProduct;
         this.prizeProduct = prizeProduct;
         this.iva = iva;
+        this.categoryProduct.setNameCategory(nameCategory);
+        this.categoryProduct.setDescriptionCategory(descriptionCategory);
     }
 
     public Prodotto(){
@@ -65,21 +76,23 @@ public class Prodotto {
     //Metodi
     @Override
     public String toString() {
+        String decimalFormattatoSum = String.format("%.2f",SumPriceWthIva());
+        String decimalFormattatoPrice = String.format("%.2f",prizeProduct);
         return "Prodotto\n"
                 +"----------\n"+
                 "codeProduct = " + codeProduct +"\n"+
                 "nameProduct = " + nameProduct +"\n"+
                 "descriptionProduct = " + descriptionProduct +"\n"+
-                "prizeProduct = " + prizeProduct + "€"+"\n"+
+                "prizeProduct = " + decimalFormattatoPrice + "€"+"\n"+
                 "iva = " + iva + "%\n"+
-                "sumWithIva = " +SumPriceWthIva()+"€"+"\n"+
+                "sumWithIva = " +decimalFormattatoSum+"€"+"\n"+
                 "completeProductWithCode = "+UnionCodePlusNameProduct()+"\n"+
                 "----------";
     }
 
     //Metodo somma prodotto più iva
-    public int SumPriceWthIva(){
-        return (int) (prizeProduct + ((prizeProduct * iva)/100));
+    public double SumPriceWthIva(){
+        return (double) (prizeProduct + ((prizeProduct * iva)/100));
     }
 
     //Metodo nome esteso con code
