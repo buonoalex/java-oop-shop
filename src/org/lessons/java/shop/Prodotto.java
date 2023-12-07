@@ -20,8 +20,13 @@ public class Prodotto {
         return nameProduct;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
+    public void setNameProduct(String nameProduct) throws IllegalArgumentException{
+        if (nameProduct.isEmpty()){
+            throw new IllegalArgumentException("Non ci può essere un prodotto senza nome");
+        }else{
+            this.nameProduct = nameProduct;
+        }
+
     }
 
     public String getDescriptionProduct() {
@@ -36,16 +41,24 @@ public class Prodotto {
         return prizeProduct;
     }
 
-    public void setPrizeProduct(int prizeProduct) {
-        this.prizeProduct = prizeProduct;
+    public void setPrizeProduct(double prizeProduct) throws IllegalArgumentException {
+        if (prizeProduct < 0){
+            throw new IllegalArgumentException("Non ci può essere un prezzo negativo");
+        }else {
+            this.prizeProduct = prizeProduct;
+        }
     }
 
     public int getIva() {
         return iva;
     }
 
-    public void setIva(int iva) {
-        this.iva = iva;
+    public void setIva(int iva) throws IllegalArgumentException {
+        if (iva < 0){
+            throw new IllegalArgumentException("Non ci può essere un iva negativa");
+        }else {
+            this.iva = iva;
+        }
     }
 
     public Categoria getCategoryProduct() {
@@ -61,10 +74,10 @@ public class Prodotto {
     public Prodotto(String nameProduct, String descriptionProduct, double prizeProduct, int iva , String nameCategory , String descriptionCategory) {
         Random codiceSegretoRandom = new Random();
         this.codeProduct = codiceSegretoRandom.nextInt(1,1000);
-        this.nameProduct = nameProduct;
+        setNameProduct(nameProduct);
         this.descriptionProduct = descriptionProduct;
-        this.prizeProduct = prizeProduct;
-        this.iva = iva;
+        setPrizeProduct(prizeProduct);
+        setIva(iva);
         this.categoryProduct.setNameCategory(nameCategory);
         this.categoryProduct.setDescriptionCategory(descriptionCategory);
     }
